@@ -75,27 +75,18 @@ def generate(templatedir, destinationdir, templateFilename):
             )
         }
 
-        # Find trimmedRunsInCategory by only including one run per runner from sortedRunsInCategory
-        trimmedRunsInCategory = []
-        runnersRepresentedInCategory = []
-        for run in sortedRunsInCategory:
-            thisRun = runs[run]
-            runner = thisRun["tk_run_runner"]
-            if runner not in runnersRepresentedInCategory:
-                trimmedRunsInCategory.append(thisRun)
-            runnersRepresentedInCategory.append(runner)
-
         # Replace lk_leaderboard with category leaderboard table
         place = 1
         lk_leaderboard = '<table class="categoryBoard centerHoriz">'
-        for run in trimmedRunsInCategory:
+        for run in sortedRunsInCategory:
+            thisRun = runs[run]
 
             # Define values for table
-            runner = run["tk_run_runner"]
-            runId = run["tk_run_id"]
+            runner = thisRun["tk_run_runner"]
+            runId = thisRun["tk_run_id"]
             runLink = f"../../runs/{runId}"
             runDuration = str(runDurationsInCategory[runId])
-            runDate = run["tk_run_date"]
+            runDate = thisRun["tk_run_date"]
 
             # Concatenate a row to the table
             lk_leaderboard += f'<tr><td>{place}.</td><td>{runner}</td><td><a href="{runLink}">{runDuration}</a></td><td>{runDate}</td></tr>'
