@@ -58,14 +58,15 @@ def generate(templatedir, destinationdir, templateFilename):
         runDurationsInCategory = {}
         for run in runsInCategory:
             thisRun = runsInCategory[run]
-            runDurationSplit = [
-                float(value) for value in thisRun["tk_run_duration"].split(":")
-            ]
-            runDurationsInCategory[thisRun["tk_run_id"]] = datetime.timedelta(
-                hours=runDurationSplit[0],
-                minutes=runDurationSplit[1],
-                seconds=runDurationSplit[2],
-            )
+            if thisRun["tk_run_duration"] and thisRun["tk_run_duration"] != "DNF":
+                runDurationSplit = [
+                    float(value) for value in thisRun["tk_run_duration"].split(":")
+                ]
+                runDurationsInCategory[thisRun["tk_run_id"]] = datetime.timedelta(
+                    hours=runDurationSplit[0],
+                    minutes=runDurationSplit[1],
+                    seconds=runDurationSplit[2],
+                )
 
         # Find sortedRunsInCategory by sorting durations from runDurationsInCategory
         sortedRunsInCategory = {
@@ -99,6 +100,26 @@ def generate(templatedir, destinationdir, templateFilename):
             )
 
             place += 1
+
+        # Add DNF runs to leaderboard after sorted runs
+        for run in runsInCategory:
+            thisRun = runsInCategory[run]
+            if thisRun["tk_run_id"] not in runDurationsInCategory:
+                runner = thisRun["tk_run_runner"]
+                runId = thisRun["tk_run_id"]
+                runLink = f"../../runs/{runId}"
+                runDate = thisRun["tk_run_date"]
+
+                lk_leaderboard += f'<tr><td>{place}.</td><td>{runner}</td><td><a href="{runLink}">DNF</a></td><td>{runDate}</td></tr>'
+
+                util_file.replaceTextInFile(
+                    f"{destinationdir}/../runs/{runId}/index.html",
+                    "lk_run_place",
+                    str(place),
+                )
+
+                place += 1
+
         lk_leaderboard += "</table>"
 
         # Replace lk_leaderboard placeholder with table string

@@ -1,4 +1,6 @@
 tk_category_dashname,tk_category_name,tk_category_rules
-100,100%,"Twee bapao's opeten. Drinken tussendoor is niet toegestaan, en je mag alleen een klein beetje chilisaus gebruiken gedurende de run. De tijd stopt wanneer de laatste hap bapao je mond ingaat."
+100,100%,"Twee bapao's opeten. Drinken tussendoor is niet toegestaan, en je mag alleen een klein beetje chilisaus gebruiken gedurende de run. De tijd stopt wanneer je de laatste hap bapao doorslikt, en je mond dus leeg is."
+any,any%,"Twee bapao's opeten. Drinken tussendoor is niet toegestaan, en je mag alleen een klein beetje chilisaus gebruiken gedurende de run. De tijd stopt wanneer de laatste hap bapao je mond ingaat."
+brak,brak%,"Onguur brak twee van die broodjes naar achter schuiven. Je moet dus een kater hebben, verder gelden de standaardregels."
 TAS,TAS,"Twee bapao's opeten. Drinken tussendoor is toegestaan, en de hoeveelheid chilisaus die je mag gebruiken is onbeperkt. De tijd stopt wanneer de laatste hap bapao je mond ingaat."
 Breakfast_of_Champions,Breakfast of Champions,"Twee bapao's kip, en twee bapao's rund opeten. Drinken tussendoor is niet toegestaan, en je mag alleen een klein beetje chilisaus gebruiken gedurende de run. De tijd stopt wanneer de laatste hap bapao je mond ingaat."

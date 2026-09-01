@@ -44,12 +44,13 @@ def generate(templatedir, destinationdir, templateFilename):
                 tk_run_duration = thisRun[key]
 
         # Replace category tk placeholders with values
-        for key in categories[thisRun["tk_run_category_dashname"]]:
-            util_file.replaceTextInFile(
-                f"{path}/index.html",
-                key,
-                categories[thisRun["tk_run_category_dashname"]][key],
-            )
+        if thisRun["tk_run_category_dashname"] in categories:
+            for key in categories[thisRun["tk_run_category_dashname"]]:
+                util_file.replaceTextInFile(
+                    f"{path}/index.html",
+                    key,
+                    categories[thisRun["tk_run_category_dashname"]][key],
+                )
 
         # Replace config tk placeholders with values
         for key in config.keys():
@@ -68,12 +69,18 @@ def generate(templatedir, destinationdir, templateFilename):
             )
 
         # lk_run_duration handler
-        runDurationSplit = [float(value) for value in tk_run_duration.split(":")]
-        lk_run_duration = datetime.timedelta(
-            hours=runDurationSplit[0],
-            minutes=runDurationSplit[1],
-            seconds=runDurationSplit[2],
-        )
-        util_file.replaceTextInFile(
-            f"{path}/index.html", "lk_run_duration", str(lk_run_duration)
-        )
+        if tk_run_duration == "" or tk_run_duration == "DNF":
+            util_file.replaceTextInFile(
+                f"{path}/index.html", "lk_run_duration", "DNF"
+            )
+
+        else:
+            runDurationSplit = [float(value) for value in tk_run_duration.split(":")]
+            lk_run_duration = datetime.timedelta(
+                hours=runDurationSplit[0],
+                minutes=runDurationSplit[1],
+                seconds=runDurationSplit[2],
+            )
+            util_file.replaceTextInFile(
+                f"{path}/index.html", "lk_run_duration", str(lk_run_duration)
+            )
