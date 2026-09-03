@@ -91,6 +91,18 @@ td:last-child {
     background-color: var(--color-background-tertiary);
 }
 
+.leaderboardCrown, .leaderboardWinnerTime {
+    color: #C99600;
+}
+
+.leaderboardWinnerLink {
+    text-decoration-color: #C99600;
+}
+
+.leaderboardDnf {
+    color: #B42318;
+}
+
 .runContainer {
     text-align: center;
     padding-bottom: 3%;

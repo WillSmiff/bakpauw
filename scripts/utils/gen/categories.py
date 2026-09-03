@@ -88,9 +88,20 @@ def generate(templatedir, destinationdir, templateFilename):
             runLink = f"../../runs/{runId}"
             runDuration = str(runDurationsInCategory[runId])
             runDate = thisRun["tk_run_date"]
+            runnerDisplay = (
+                f'{runner} <span class="leaderboardCrown" aria-label="fastest run">&#x1F451;</span>'
+                if place == 1
+                else runner
+            )
+            durationDisplay = (
+                f'<span class="leaderboardWinnerTime">{runDuration}</span>'
+                if place == 1
+                else runDuration
+            )
+            durationLinkClass = ' class="leaderboardWinnerLink"' if place == 1 else ""
 
             # Concatenate a row to the table
-            lk_leaderboard += f'<tr><td>{place}.</td><td>{runner}</td><td><a href="{runLink}">{runDuration}</a></td><td>{runDate}</td></tr>'
+            lk_leaderboard += f'<tr><td>{place}.</td><td>{runnerDisplay}</td><td><a{durationLinkClass} href="{runLink}">{durationDisplay}</a></td><td>{runDate}</td></tr>'
 
             # Also handle replacing lk_run_place on run pages
             util_file.replaceTextInFile(
@@ -110,7 +121,7 @@ def generate(templatedir, destinationdir, templateFilename):
                 runLink = f"../../runs/{runId}"
                 runDate = thisRun["tk_run_date"]
 
-                lk_leaderboard += f'<tr><td>{place}.</td><td>{runner}</td><td><a href="{runLink}">DNF</a></td><td>{runDate}</td></tr>'
+                lk_leaderboard += f'<tr><td>{place}.</td><td>{runner}</td><td><a class="leaderboardDnf" href="{runLink}">DNF</a></td><td>{runDate}</td></tr>'
 
                 util_file.replaceTextInFile(
                     f"{destinationdir}/../runs/{runId}/index.html",
