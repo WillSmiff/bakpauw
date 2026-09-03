@@ -11,7 +11,7 @@ def dictWriter(filepath, dict, flag="w"):
     flag -- flag for open() (default "w")\n
         "w" will also activate writeheader()\n
     """
-    with open(filepath, flag, newline="") as file:
+    with open(filepath, flag, newline="", encoding="utf-8") as file:
 
         dictWriter = csv.DictWriter(file, fieldnames=dict.keys(), delimiter=",")
         if flag == "w":
@@ -25,7 +25,7 @@ def dictReaderFirstRow(filepath):
 
     filepath -- the path of the csv\n
     """
-    with open(filepath, newline="") as file:
+    with open(filepath, newline="", encoding="utf-8") as file:
         dict = {}
         dictReader = csv.DictReader(file)
         for row in dictReader:
@@ -43,7 +43,7 @@ def dictReaderMultiRow(filepath, idName):
     filepath -- the path of the csv\n
     idName -- the property in the header of the csv to use as each key of the resulting dictionary\n
     """
-    with open(filepath, newline="") as file:
+    with open(filepath, newline="", encoding="utf-8") as file:
         dict = {}
         dictReader = csv.DictReader(file)
         for row in dictReader:
@@ -59,7 +59,7 @@ def readerWithFunction(filepath, function, arg=None):
     function -- the function we're executing once per row\n
     arg -- if the function takes an additional argument, we pass arg (default None)\n
     """
-    with open(filepath, newline="") as file:
+    with open(filepath, newline="", encoding="utf-8") as file:
         reader = csv.reader(file, delimiter=",")
         value = []
         for row in reader:

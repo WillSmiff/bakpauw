@@ -8,9 +8,9 @@ def replaceTextInFile(filepath, oldText, newText):
     oldText -- the text to replace\n
     newText -- the text to implement\n
     """
-    file = open(filepath, "rt")
+    file = open(filepath, "rt", encoding="utf-8")
     newFile = file.read().replace(oldText, newText)
     file.close()
-    file = open(filepath, "wt")
+    file = open(filepath, "wt", encoding="utf-8")
     file.write(newFile)
     file.close
