@@ -19,6 +19,7 @@ def generate(templatedir, destinationdir, templateFilename):
     # Read categories and config csv files
     idName = "tk_category_dashname"
     categories = util_csv.dictReaderMultiRow("../csv/categories.csv", idName)
+    runs = util_csv.dictReaderMultiRow("../csv/runs.csv", "tk_run_id")
     config = util_csv.dictReaderFirstRow("../csv/config.csv")
 
     # Replace config tk placeholders with values
@@ -35,3 +36,14 @@ def generate(templatedir, destinationdir, templateFilename):
             f'<a class="categoryLink" href="categories/{categories[category][tk_category_dashname]}">{categories[category][tk_category_name]}</a>lk_categories',
         )
     util_file.replaceTextInFile(f"{destinationdir}/index.html", "lk_categories", "")
+
+    # lk_bapaos_eaten handler
+    bapaos_eaten = sum(
+        4 if run["tk_run_category_dashname"] == "BoC" else 2
+        for run in runs.values()
+    )
+    util_file.replaceTextInFile(
+        f"{destinationdir}/index.html",
+        "lk_bapaos_eaten",
+        f"Bapao's gegeten: <strong>{bapaos_eaten}</strong>",
+    )
