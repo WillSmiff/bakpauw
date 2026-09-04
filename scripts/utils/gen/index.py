@@ -45,5 +45,17 @@ def generate(templatedir, destinationdir, templateFilename):
     util_file.replaceTextInFile(
         f"{destinationdir}/index.html",
         "lk_bapaos_eaten",
-        f"Bapao's gegeten: <strong>{bapaos_eaten}</strong>",
+        f"Aantal bapao's gegeten: <strong>{bapaos_eaten}</strong>",
     )
+
+    # lk_poultry_eaten handler
+    poultry = sum(
+        100.8 if run["tk_run_category_dashname"] == "BoC" else 50.4
+        for run in runs.values()
+    ) / 1000
+    poultry_eaten = "{:.3f}".format(poultry)
+    util_file.replaceTextInFile(
+        f"{destinationdir}/index.html",
+        "lk_poultry_eaten",
+        f"Hoeveelheid slachtafval gegeten: <strong>{poultry_eaten} kg</strong>",
+    ) 
